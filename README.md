@@ -1,8 +1,5 @@
 # ![Native2Native](https://github.com/fpark7/Native2Native/blob/master/assets/logo_70.png)
-<br>
-<br>
-##
-
+## Native2Native
 ### About
 Our hackathon project for Hack.UVA 2018. [According to the US Census](https://www.census.gov/hhes/socdemo/language/data/acs/PAA_2005_AbilityandEarnings.pdf), there is a high correlation between English speaking ability and employment rate, as well as self-confidence. This clearly puts immigrants and non-native speakers at a disadvantage in the United States. [Image from US Census](https://www.census.gov/hhes/socdemo/language/data/acs/PAA_2005_AbilityandEarnings.pdf)
 
