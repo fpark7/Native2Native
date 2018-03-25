@@ -1,4 +1,5 @@
 import sys, os
+import subprocess
 import urllib, optparse
 from flask import Flask, jsonify, request, abort, make_response
 #from werkzeug.utils import secure_filename
@@ -19,14 +20,18 @@ def hello_world():
 @app.route('/broken2complete', methods=['GET'])
 def broken2complete():
 	if request.method == 'GET':
+		#os.environ['PYTHON_PATH']=os.environ['PYTHON_PATH'] + ":" + os.path.join(os.getcwd(), "SimpleText", "nmt")
 		text_encoded = request.args.get('text')
 		if(text_encoded is None or text_encoded==''):
 			abort(400)
-		print(text_encoded)
+
 		text = urllib.unquote_plus(text_encoded)
+		subprocess.run('python', '-m', os.path.join('SimpleText', 'nmt.nmt'), '--out_dir='+ os.path.join('model','nmt_attention_bpe_2_layers_native'), '--inference_input_file=\''+ text+'\'', '--inference_output_file='+ os.path.join('test', 'inference.txt'))
 
 		#enter model stuff here
-		output = seq2seq.translate(text)
+		#output = seq2seq.translate(text)
+		output = open(os.path.join('SimpleText', 'test', 'inference.txt')).readline()
+
 		return jsonify(output)
 
 #assumes parameter is encoded using quote_plus
@@ -36,7 +41,7 @@ def complex2simple():
 		text_encoded = request.args.get('text')
 		if(text_encoded is None or text_encoded==''):
 			abort(400)
-		print(text_encoded)
+
 		text = urllib.unquote_plus(text_encoded)
 
 		#enter model stuff here
