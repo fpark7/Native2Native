@@ -1,0 +1,197 @@
+<!DOCTYPE HTML>
+<!--
+	Spectral by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<!--suppress JSAnnotator -->
+<html>
+
+	<head>
+		<title>Natice2Native</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
+		<!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
+		<link href="css/bootstrap.css" rel="stylesheet">
+
+
+		<link href="css/bootstrap.min.css" rel ="stylesheet">
+		<link href="cover.css" rel="stylesheet">
+	</head>
+
+
+	<body class="landing">
+
+
+
+				<!-- Header -->
+					<header id="header" class="alt">
+						<h1>Native2Native</h1>
+						<nav id="nav">
+							<ul>
+								<li class="special">
+									<a href="#menu" class="menuToggle"><span>Menu</span></a>
+									<div id="menu">
+										<ul>
+											<li><a href="index.html">Home</a></li>
+											<li><a href="generic.html">Generic</a></li>
+											<li><a href="#">Sign Up</a></li>
+											<li><a href="#">Log In</a></li>
+										</ul>
+									</div>
+								</li>
+							</ul>
+						</nav>
+					</header>
+
+				<!-- Banner -->
+					<section id="banner" style="background-color: #a6e0db">
+
+						<div class="inner">
+							<h2 style="color: #4e555b">Native2Native</h2><br>
+							<br>
+							<br>
+
+						</div>
+						<!--<div class="inner cover">-->
+						<div class="inner cover">
+							<h3 style="color: #4e555b">What do you want to say?</h3><br>
+
+							<form name="form" action = "get"  >
+
+								<div style="width: 420px; margin: 0 auto;" >
+
+									<input type="text" class="form-control" id="brokenwords" aria-describedby="Help" placeholder="Enter" style=" float: left;display: inline; width: 380px;" name="text">
+									<img src="images/v2.png" onclick="recognition.start()" style="display: inline; float: left; margin: 10px 12px 11px 11px; cursor: pointer;" >
+									<!--<button onclick="recognition.start()" style="float: right; border: none !important;border-color:#a6e0db ;"><img src="images/v2.png"></button>-->
+									<!--<img src="images/v2.png" onclick="recognition.start()" style="display: inline-block; float: right; padding-right: 300px; padding-top: 10px;" >-->
+
+
+									<!--<p id = "ops"></p>-->
+										<!--<button type="submit" class="btn btn-primary">Submit</button>-->
+										<!--<a href="javascript:gotosubmit();" class="more scorlly">submit</a>-->
+										<br>
+										<br>
+									<br>
+									<br>
+
+								</div>
+								<!--<button onclick="recognition.start()" style="float: right; border: none !important;padding-right: 100px; padding:0; margin: 0"><img src="images/v2.png"></button>-->
+
+								<a href="#one" style="color: #4e555b" class="more scrolly"  onclick="gotosubmit()">submit</a>
+
+								<!--<a href="#one"  class="more scrolly" style="color: #ffc107">Learn More</a>-->
+								<!--<small id="emailHelp" class="form-text text-muted">###</small>-->
+
+								<!--<input type="text" id="output" name="output" >-->
+
+							</form>
+
+							<!--<a href="#one" class="more scrolly">Submit</a>-->
+						</div>
+
+					</section>
+				<script type="text/javascript">
+                    function gotosubmit() {
+                        var text = document.getElementsByName("text")[0].value;
+                       // console.log(text);
+                        var xhr = new XMLHttpRequest();
+                        xhr.open('GET',"https://dev.cfapps.us10.hana.ondemand.com/broken2complete?text="+text,true);
+                        xhr.send();
+                        // text.action="https://dev.cfapps.us10.hana.ondemand.com/broken2complete?";
+                        // text.submit();
+                        xhr.onreadystatechange = function() {
+                            if(xhr.readyState==4 && xhr.status==200) {
+                                // alert(xhr.responseText);
+                                var response = xhr.responseText;
+                                document.getElementById("output").value = response;
+                                document.getElementById('output').innerHTML = response;
+                                // alert(response);
+
+                            }
+                        }
+
+                    }
+				</script>
+				<script>
+                    var recognition = new webkitSpeechRecognition();
+                    recognition.onresult = function (event) {
+                        //alert(event.results[0][0].transcript);
+
+                        var ops = event.results[0][0].transcript;
+                        document.getElementById("brokenwords").value = ops;
+                        document.getElementById('brokenwords').innerHTML = ops;
+
+
+                    }
+
+
+                    // recognition.continuous = true;
+
+                    // var output = document.getElementById('output2');
+                    // recognition.onresult = function(event) {
+                    //     output.textContent = event.results[0][0].transcript;
+                    //     alert(output.textContent);
+                    //     alert("?");
+                    // };
+
+				</script>
+
+
+
+
+				<!--<button onclick="recognition.stop()">Stop</button>-->
+
+
+
+				<!-- One -->
+					<section id="one" class="wrapper style1 special">
+						<div class="inner">
+							<header class="major">
+
+								<h3><p id="output"></p></h3>
+								<!--<h3><p id="output"></p></h3>-->
+								<!--<h3><p id="output"></p></h3>-->
+							</header>
+
+						</div>
+					</section>
+
+
+
+				<!-- Two -->
+
+
+				<!-- Three -->
+
+
+				<!-- Footer -->
+					<!--<footer id="footer">-->
+						<!--<ul class="icons">-->
+							<!--<li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>-->
+							<!--<li><a href="#" class="icon fa-facebook"><span class="label">Facebook</span></a></li>-->
+							<!--<li><a href="#" class="icon fa-instagram"><span class="label">Instagram</span></a></li>-->
+							<!--<li><a href="#" class="icon fa-dribbble"><span class="label">Dribbble</span></a></li>-->
+							<!--<li><a href="#" class="icon fa-envelope-o"><span class="label">Email</span></a></li>-->
+						<!--</ul>-->
+						<!--<ul class="copyright">-->
+							<!--<li>&copy; Untitled</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>-->
+						<!--</ul>-->
+					<!--</footer>-->
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.scrollex.min.js"></script>
+			<script src="assets/js/jquery.scrolly.min.js"></script>
+			<script src="assets/js/skel.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>
