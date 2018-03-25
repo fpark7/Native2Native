@@ -26,9 +26,8 @@ def broken2complete():
 			abort(400)
 
 		text = urllib.parse.unquote_plus(text_encoded)
-		subprocess.run(['python', '-m', 'nmt.nmt', '--out_dir='+ os.path.join('model','nmt_attention_bpe_2_layers_native'), '--inference_input_file=\''+ text+'\'', '--inference_output_file='+ os.path.join('test', 'inference.txt')])
-
-
+		#subprocess.run(['python', '-m', 'nmt.nmt', '--out_dir='+ os.path.join('model','nmt_attention_bpe_2_layers_native'), '--inference_input_file=\''+ text+'\'', '--inference_output_file='+ os.path.join('test', 'inference.txt')])
+		os.system('python -m nmt.nmt --out_dir=model/nmt_attention_bpe_2_layers_native --inference_input_file=my text --inference_output_file=test/inference.txt')
 		#enter model stuff here
 		#output = seq2seq.translate(text)
 		output = open(os.path.join('SimpleText', 'test', 'inference.txt')).readline()
