@@ -78,8 +78,8 @@ def load_data(inference_input_file, hparams=None):
 #     inference_data = [inference_data[i] for i in hparams.inference_indices]
 
 #   return inference_data
-  return [unicode(inference_input_file)]
-
+  # return [unicode(inference_input_file)]
+  return [inference_input_file]
 
 def inference(ckpt,
               inference_input_file,

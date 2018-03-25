@@ -26,12 +26,11 @@ def broken2complete():
 			abort(400)
 
 		text = urllib.parse.unquote_plus(text_encoded)
-#        os.system("python -m nmt.nmt --out_dir=/Users/fengyangzhang/Desktop/fullVersino/Native2Native/SimpleText/model/nmt_attention_bpe_2_layers_native --inference_input_file=\'i use .\' --inference_output_file=/Users/fengyangzhang/Desktop/fullVersino/Native2Native/SimpleText/test/inference.txt")         
-#	subprocess.run(['python', '-m', os.path.join('SimpleText', 'nmt.nmt'), '--out_dir='+ os.path.join('SimpleText', 'model','nmt_attention_bpe_2_layers_native'), '--inference_input_file=\''+ text+'\'', '--inference_output_file='+ os.path.join('SimpleText', 'test', 'inference.txt')])
-#        os.system("python -m nmt.nmt --out_dir=/Users/fengyangzhang/Desktop/fullVersino/Native2Native/SimpleText/model/nmt_attention_bpe_2_layers_native --inference_input_file='i use .' --inference_output_file=/Users/fengyangzhang/Desktop/fullVersino/Native2Native/SimpleText/test/inference.txt")
+		subprocess.run(['python', '-m', 'nmt.nmt', '--out_dir='+ os.path.join('model','nmt_attention_bpe_2_layers_native'), '--inference_input_file=\''+ text+'\'', '--inference_output_file='+ os.path.join('test', 'inference.txt')])
+
+
 		#enter model stuff here
 		#output = seq2seq.translate(text)
-        text = 'hello'
 		output = open(os.path.join('SimpleText', 'test', 'inference.txt')).readline()
 
 		return jsonify(output)
