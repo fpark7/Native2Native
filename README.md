@@ -1,4 +1,4 @@
-<a href="url"><img src="https://github.com/fpark7/Native2Native/blob/master/assets/logo.PNG" align="left" width="300" ></a>
+# ![Native2Native](https://github.com/fpark7/Native2Native/blob/master/assets/logo_70.png)
 <br>
 <br>
 ##
