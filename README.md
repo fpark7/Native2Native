@@ -14,12 +14,12 @@ Current translating applications are very flawed. First of all, syntax and struc
 <br>
 
 However, we have noticed that non-native English speakers know what they want to say; they're just unable to articulate it well.
-Native2Native is a Natural Language Processor that takes in a broken English sentence by a non-native speaker and completes it using Deep Learning, striving to be the "Native" voice for them. (The name "Native2Native" also comes from the Seq2Seq Recurrent Neural Network model used for our application)
+Native2Native is a Natural Language Processor that takes in a "difficult-to-understand" English sentence by a non-native speaker and completes it using Deep Learning, striving to be the "Native" voice for them. (The name "Native2Native" also comes from the Seq2Seq Recurrent Neural Network model used for our application)
 
 ### Purpose/Vision
-Instead of focusing/training Voice-Recognition and Language-Recognition systems solely on eloquent English speakers, we should also focus on dedicating them to the people who need these systems the most. In addition, non-native speakers are more likely to learn from corrections to their own English rather than translations of their own native languages. We hope the Native2Native will be a tool to equalize and empower immigrants by offering them a new voice and method to improve use of the English language. 
+Instead of focusing/training Voice-Recognition and Language-Recognition systems solely on eloquent English speech, we should also focus on dedicating them to the people who need these systems the most. In addition, non-native speakers are more likely to learn from corrections to their own English rather than translations of their own native languages. We hope the Native2Native will be a tool to equalize and empower immigrants by offering them a new voice and method to improve use of the English language. 
 
-Our vision is to generalize our technology and see more Voice-Recognition Models and Language-Translation Models train on data from non-natives rather than native speakers for all languages.
+Our vision is to generalize our technology and see more Voice-Recognition Models and Language-Translation Models train on data from non-natives rather than native speakers for all languages. We also hope to see more Natural Language Processing (NLP) research focus towards "hard-to-understand" phrases rather than perfect English.
 
 ### Algorithm
 Our naive model trains on "non-native" sentences generated using SpaCy. SpaCy is a power natural language processing library. By labeling linguistic features, tagging parts of speech, and tracing dependencies, we were able to emulate a more clever training data set for our neural network. This dataset includes proper sentences that were modified by removing stop-words (common, small words) and swapping nouns with neighboring adjectives or descriptive phrases. In the future, we hope to use real world data and have more time to train our models!
