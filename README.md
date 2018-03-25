@@ -27,7 +27,7 @@ Our naive model trains on "non-native" sentences generated using SpaCy. SpaCy is
 
 A [Seq2Seq Recurrent Neural Network](https://arxiv.org/pdf/1409.3215.pdf) is used to train on these "non-native-incomplete" sentences and maps them to "complete" sentences. [Image from here](https://google.github.io/seq2seq/)
 
-![seq2seq](https://github.com/fpark7/Native2Native/blob/master/assets/seq2seq.gif)
+![Translation Model](https://3.bp.blogspot.com/-3Pbj_dvt0Vo/V-qe-Nl6P5I/AAAAAAAABQc/z0_6WtVWtvARtMk0i9_AtLeyyGyV6AI4wCLcB/s1600/nmt-model-fast.gif)
 <br>
 Our neural network is implemented with [Pytorch](http://pytorch.org/) and deployed using the [SAP Cloud Platform](https://cloudplatform.sap.com/index.html).
 
