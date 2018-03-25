@@ -79,7 +79,7 @@ def load_data(inference_input_file, hparams=None):
 
 #   return inference_data
   # return [unicode(inference_input_file)]
-  return [inference_input_file]
+  return [inference_input_file.lower()]
 
 def inference(ckpt,
               inference_input_file,

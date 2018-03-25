@@ -99,7 +99,7 @@
                         var text = document.getElementsByName("text")[0].value;
                        // console.log(text);
                         var xhr = new XMLHttpRequest();
-                        xhr.open('GET',"https://dev.cfapps.us10.hana.ondemand.com/broken2complete?text="+text,true);
+                        xhr.open('GET',"http://127.0.0.1:8002/broken2complete?text="+text,true);
                         xhr.send();
                         // text.action="https://dev.cfapps.us10.hana.ondemand.com/broken2complete?";
                         // text.submit();
