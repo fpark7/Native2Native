@@ -11,12 +11,12 @@ from torch.autograd import Variable
 from torch import optim
 import torch.nn.functional as F
 
-import matplotlib.pyplot as plt
-import matplotlib.ticker as ticker
+# import matplotlib.pyplot as plt
+# import matplotlib.ticker as ticker
 import numpy as np
-%matplotlib inline
+# %matplotlib inline
 
-USE_CUDA = True
+USE_CUDA = False
 SOS_token = 0
 EOS_token = 1
 
@@ -268,39 +268,39 @@ class AttnDecoderRNN(nn.Module):
         # Return final output, hidden state, and attention weights (for visualization)
         return output, context, hidden, attn_weights
 
-def testStuff():
-	encoder_test = EncoderRNN(10, 10, 2)
-	decoder_test = AttnDecoderRNN('general', 10, 10, 2)
-	print(encoder_test)
-	print(decoder_test)
 
-	encoder_hidden = encoder_test.init_hidden()
-	word_input = Variable(torch.LongTensor([1, 2, 3]))
-	if USE_CUDA:
-	    encoder_test.cuda()
-	    word_input = word_input.cuda()
-	encoder_outputs, encoder_hidden = encoder_test(word_input, encoder_hidden)
+encoder_test = EncoderRNN(10, 10, 2)
+decoder_test = AttnDecoderRNN('general', 10, 10, 2)
+print(encoder_test)
+print(decoder_test)
 
-	word_inputs = Variable(torch.LongTensor([1, 2, 3]))
-	decoder_attns = torch.zeros(1, 3, 3)
-	decoder_hidden = encoder_hidden
-	decoder_context = Variable(torch.zeros(1, decoder_test.hidden_size))
+encoder_hidden = encoder_test.init_hidden()
+word_input = Variable(torch.LongTensor([1, 2, 3]))
+if USE_CUDA:
+    encoder_test.cuda()
+    word_input = word_input.cuda()
+encoder_outputs, encoder_hidden = encoder_test(word_input, encoder_hidden)
 
-	if USE_CUDA:
-	    decoder_test.cuda()
-	    word_inputs = word_inputs.cuda()
-	    decoder_context = decoder_context.cuda()
+word_inputs = Variable(torch.LongTensor([1, 2, 3]))
+decoder_attns = torch.zeros(1, 3, 3)
+decoder_hidden = encoder_hidden
+decoder_context = Variable(torch.zeros(1, decoder_test.hidden_size))
 
-	for i in range(3):
-	    decoder_output, decoder_context, decoder_hidden, decoder_attn = decoder_test(word_inputs[i], decoder_context, decoder_hidden, encoder_outputs)
-	    print(decoder_output.size(), decoder_hidden.size(), decoder_attn.size())
-	    decoder_attns[0, i] = decoder_attn.squeeze(0).cpu().data
+if USE_CUDA:
+    decoder_test.cuda()
+    word_inputs = word_inputs.cuda()
+    decoder_context = decoder_context.cuda()
+
+for i in range(3):
+    decoder_output, decoder_context, decoder_hidden, decoder_attn = decoder_test(word_inputs[i], decoder_context, decoder_hidden, encoder_outputs)
+    print(decoder_output.size(), decoder_hidden.size(), decoder_attn.size())
+    decoder_attns[0, i] = decoder_attn.squeeze(0).cpu().data
 
 
 input_lang, output_lang, pairs = prepare_data('eng', 'fra', True)
 # Print an example pair
 print(random.choice(pairs))
-testStuff()
+#testStuff()
 
 teacher_forcing_ratio = 0.5
 clip = 5.0
@@ -319,7 +319,7 @@ def train(input_variable, target_variable, encoder, decoder, encoder_optimizer, 
     # Run words through encoder
     encoder_hidden = encoder.init_hidden()
     encoder_outputs, encoder_hidden = encoder(input_variable, encoder_hidden)
-    
+
     # Prepare input and output variables
     decoder_input = Variable(torch.LongTensor([[SOS_token]]))
     decoder_context = Variable(torch.zeros(1, decoder.hidden_size))
@@ -331,23 +331,23 @@ def train(input_variable, target_variable, encoder, decoder, encoder_optimizer, 
     # Choose whether to use teacher forcing
     use_teacher_forcing = random.random() < teacher_forcing_ratio
     if use_teacher_forcing:
-        
+
         # Teacher forcing: Use the ground-truth target as the next input
         for di in range(target_length):
             decoder_output, decoder_context, decoder_hidden, decoder_attention = decoder(decoder_input, decoder_context, decoder_hidden, encoder_outputs)
-            loss += criterion(decoder_output[0], target_variable[di])
+            loss += criterion(decoder_output, target_variable[di])
             decoder_input = target_variable[di] # Next target is next input
 
     else:
         # Without teacher forcing: use network's own prediction as the next input
         for di in range(target_length):
             decoder_output, decoder_context, decoder_hidden, decoder_attention = decoder(decoder_input, decoder_context, decoder_hidden, encoder_outputs)
-            loss += criterion(decoder_output[0], target_variable[di])
-            
+            loss += criterion(decoder_output, target_variable[di])
+
             # Get most likely word index (highest value) from output
             topv, topi = decoder_output.data.topk(1)
             ni = topi[0][0]
-            
+
             decoder_input = Variable(torch.LongTensor([[ni]])) # Chosen word is next input
             if USE_CUDA: decoder_input = decoder_input.cuda()
 
@@ -360,7 +360,7 @@ def train(input_variable, target_variable, encoder, decoder, encoder_optimizer, 
     torch.nn.utils.clip_grad_norm(decoder.parameters(), clip)
     encoder_optimizer.step()
     decoder_optimizer.step()
-    
+
     return loss.data[0] / target_length
 
 def as_minutes(s):
@@ -411,7 +411,7 @@ plot_loss_total = 0 # Reset every plot_every
 
 # Begin!
 for epoch in range(1, n_epochs + 1):
-    
+
     # Get training data for this cycle
     training_pair = variables_from_pair(random.choice(pairs))
     input_variable = training_pair[0]
@@ -437,18 +437,19 @@ for epoch in range(1, n_epochs + 1):
         plot_losses.append(plot_loss_avg)
         plot_loss_total = 0
 def show_plot(points):
-    plt.figure()
-    fig, ax = plt.subplots()
-    loc = ticker.MultipleLocator(base=0.2) # put ticks at regular intervals
-    ax.yaxis.set_major_locator(loc)
-    plt.plot(points)
+    # plt.figure()
+    # fig, ax = plt.subplots()
+    # loc = ticker.MultipleLocator(base=0.2) # put ticks at regular intervals
+    # ax.yaxis.set_major_locator(loc)
+    # plt.plot(points)
+    return 0
 
-show_plot(plot_losses)
+# show_plot(plot_losses)
 
 def evaluate(sentence, max_length=MAX_LENGTH):
     input_variable = variable_from_sentence(input_lang, sentence)
     input_length = input_variable.size()[0]
-    
+
     # Run through encoder
     encoder_hidden = encoder.init_hidden()
     encoder_outputs, encoder_hidden = encoder(input_variable, encoder_hidden)
@@ -461,10 +462,10 @@ def evaluate(sentence, max_length=MAX_LENGTH):
         decoder_context = decoder_context.cuda()
 
     decoder_hidden = encoder_hidden
-    
+
     decoded_words = []
     decoder_attentions = torch.zeros(max_length, max_length)
-    
+
     # Run through decoder
     for di in range(max_length):
         decoder_output, decoder_context, decoder_hidden, decoder_attention = decoder(decoder_input, decoder_context, decoder_hidden, encoder_outputs)
@@ -478,19 +479,19 @@ def evaluate(sentence, max_length=MAX_LENGTH):
             break
         else:
             decoded_words.append(output_lang.index2word[ni])
-            
+
         # Next input is chosen word
         decoder_input = Variable(torch.LongTensor([[ni]]))
         if USE_CUDA: decoder_input = decoder_input.cuda()
-    
+
     return decoded_words, decoder_attentions[:di+1, :len(encoder_outputs)]
 
 def evaluate_randomly():
     pair = random.choice(pairs)
-    
+
     output_words, decoder_attn = evaluate(pair[0])
     output_sentence = ' '.join(output_words)
-    
+
     print('>', pair[0])
     print('=', pair[1])
     print('<', output_sentence)
