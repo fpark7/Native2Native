@@ -22,7 +22,7 @@ Our vision is to generalize our technology and see more Voice-Recognition Models
 ### Algorithm
 Our naive model trains on "non-native" sentences generated using SpaCy. SpaCy is a power natural language processing library. By labeling linguistic features, tagging parts of speech, and tracing dependencies, we were able to emulate a more clever training data set for our neural network. This dataset includes proper sentences that were modified by removing stop-words (common, small words) and swapping nouns with neighboring adjectives or descriptive phrases. In the future, we hope to use real world data and have more time to train our models!
 
-A [Seq2Seq Recurrent Neural Network](https://arxiv.org/pdf/1409.3215.pdf) is used to train on these "non-native/incomplete" sentences and maps them to "complete" sentences. [Image from here](https://google.github.io/seq2seq/) The model was trained using an [AWS](https://aws.amazon.com/) EC2 P2 instance equipped with a [NVIDIA Tesla K80 GPU](https://www.nvidia.com/en-us/data-center/tesla-k80/).
+A [Seq2Seq Recurrent Neural Network](https://arxiv.org/pdf/1409.3215.pdf) is used to train on these "non-native/incomplete" sentences and maps them to "complete" sentences. The model was trained using an [AWS](https://aws.amazon.com/) EC2 P2 instance equipped with a [NVIDIA Tesla K80 GPU](https://www.nvidia.com/en-us/data-center/tesla-k80/). [Image from here](https://google.github.io/seq2seq/)
 
 ![Translation Model](https://3.bp.blogspot.com/-3Pbj_dvt0Vo/V-qe-Nl6P5I/AAAAAAAABQc/z0_6WtVWtvARtMk0i9_AtLeyyGyV6AI4wCLcB/s1600/nmt-model-fast.gif)
 <br>
@@ -31,7 +31,7 @@ Our neural network is implemented with [Pytorch](http://pytorch.org/) and deploy
 ## Developers
 Fengyang Zhang <br>
 Felix Park <br>
-Zutong Wang <br>
+Yutong Wang <br>
 Jiten Bhatt <br>
 
 
