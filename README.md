@@ -1,4 +1,4 @@
-# ![Native2Native](https://www.github.com/fpark7/Native2Native/blob/master/assets/logo_70.png)
+# ![Native2Native](https://github.com/fpark7/Native2Native/blob/master/assets/logo_70.png)
 ## Native2Native
 <br><i>"A Voice and Text Recognition System Built to Specifically for Non-Native Speakers"</i><br>
 
