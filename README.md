@@ -34,5 +34,14 @@ Felix Park <br>
 Yutong Wang <br>
 Jiten Bhatt <br>
 
+#### Post-Hackathon Notes
+We had a great time and we're very proud of the work we completed. We ended up winning "Best Use of Machine Learning to Detect Sponsored Content" sponsored by [Leidos](https://www.leidos.com/). We're not really detecting sponsored content... but I think we received it because we had an interesting approach to a text classification problem. Not mad though :).
+
+Please excuse our bad git commit messages... this was a hackathon. 
+
+We also really wish we had more time training the model. We do not believe 24 hours to code AND train was enough. Although our model showed some powerful results, please do note that its vocabulary is very limited. 
+
+Thank you for checking out this project!
+
 
 
